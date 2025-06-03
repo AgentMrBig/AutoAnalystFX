@@ -19,18 +19,22 @@ This tool is designed to:
 ```
 AutoAnalystFX/
 ├── capture/
-│   ├── coord_helper.py         # Helper to detect screen coordinates
-│   ├── focus_chrome.py         # Focuses Chrome via taskbar icon
-│   ├── focus_mt4.py            # Focuses MT4 via taskbar icon
-│   ├── screenshot_mt4.py       # Captures MT4 window screenshot
+│   ├── focus_chrome.py
+│   ├── focus_mt4.py
+│   ├── screenshot_mt4.py
+│
+├── config/
+│   ├── coord_helper.py
+│   ├── window_title.py
 │
 ├── upload/
-│   └── upload_to_chatgpt.py    # Automates ChatGPT image upload via UI interaction
+│   └── upload_to_chatgpt.py
 │
-├── latest_chart.png            # Output chart screenshot (updated on each run)
-├── run.py                      # Main orchestrator: focus, capture, upload
-├── requirements.txt            # Python dependencies
-└── README.md                   # You're here
+├── latest_chart.png            # Output screenshot
+├── run.py                      # Orchestrator script
+├── requirements.txt            # Python deps
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -57,14 +61,13 @@ source .venv/scripts/activate  # Windows Git Bash
 pip install -r requirements.txt
 ```
 
-4. **Update coordinates**  
-Run the helper to get button/region positions:
+4. **Update coordinates**
 ```bash
-python capture/coord_helper.py
+python config/coord_helper.py
 ```
 
-Update these values in:
-- `upload_to_chatgpt.py` (for `+`, file, send buttons)
+Then update hardcoded coordinates in:
+- `upload_to_chatgpt.py` (plus button, file dialog, send button)
 - `focus_mt4.py` and `focus_chrome.py` (taskbar icon clicks)
 
 ---
@@ -75,32 +78,24 @@ Update these values in:
 python run.py
 ```
 
-This will:
-1. Focus MT4
-2. Screenshot the chart
-3. Switch to ChatGPT in Chrome
-4. Upload and send the screenshot
-
 ---
 
 ## 🛠 Dependencies
 
-- `pyautogui` – UI automation
-- `pygetwindow` – Window detection
-- `pillow` – Image capture and save
-- `time`, `os`, `subprocess`, `sys`
+- `pyautogui`
+- `pygetwindow`
+- `pillow`
 
 ---
 
-## 🧩 Planned Enhancements
+## 🧩 Future Enhancements
 
-- Add ChatGPT prompt injection for structured signal analysis
-- Parse structured JSON signals from response
-- Forward signals to MT4 EA via `orders.json`
-- Schedule automated hourly/daily capture and analysis
+- Inject chart prompts for structured analysis
+- Parse trade setups from ChatGPT response
+- Write to `orders.json` for EA execution
 
 ---
 
 ## 📄 License
 
-MIT License (or add your license of choice)
+MIT License
